@@ -36,5 +36,6 @@ build/
 **/test
 **/.mvn
 **/lib
-
+mvnw.cmd
+mvnw
 
