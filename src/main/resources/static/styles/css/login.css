@@ -1,0 +1,17 @@
+.card{
+    width: 20rem;
+    background-color: rgba(0,0,0,.5);
+}
+
+.form-group{
+    margin-top: 0.5rem;
+}
+
+h2{
+   color: azure;
+}
+
+.doubleMargin{
+    margin-top: 1rem !important;
+}
+
