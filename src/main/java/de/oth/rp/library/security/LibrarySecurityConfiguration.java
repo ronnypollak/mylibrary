@@ -57,7 +57,7 @@ public class LibrarySecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public void configuteGlobal(AuthenticationManagerBuilder auth) {
+    public void configureGlobal(AuthenticationManagerBuilder auth) {
         try {
             auth.userDetailsService(userDetailsService)
                     .passwordEncoder(passwordEncoder());

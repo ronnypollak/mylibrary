@@ -11,7 +11,7 @@ public class StartController {
 
     @RequestMapping("/")
     public String setup(){
-        return "index";
+        return "start";
     }
 
 
