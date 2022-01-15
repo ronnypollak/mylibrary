@@ -13,14 +13,38 @@ public class Author extends SingleIdEntity<Long>{
 
     @Id
     private long authorId;
-    private String firstName;
-    private String lastName;
+    private String name;
+    //changed variables bc only name is available in the openlib api
+//    private String lastName;
     @Temporal(TemporalType.DATE)
-    private Date bornDate;
+    //Changed variable name
+    private Date birthDate;
+    //added variable
+    private int workCount;
 
+
+    public Author(String name, Date birthDate, int workCount) {
+        this.name = name;
+        this.birthDate = birthDate;
+        this.workCount = workCount;
+    }
+
+    public Author() {
+
+    }
 
     @Override
     public Long getID() {
         return this.authorId;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "authorId=" + authorId +
+                ", name='" + name + '\'' +
+                ", birthDate=" + birthDate +
+                ", workCount=" + workCount +
+                '}';
     }
 }

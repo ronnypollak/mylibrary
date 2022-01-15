@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @Generated("jsonschema2pojo")
 public class Item {
 
+    private String isbn;
     @JsonProperty("kind")
     private String kind;
     @JsonProperty("id")
@@ -43,6 +44,14 @@ public class Item {
     private SearchInfo searchInfo;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
 
     @JsonProperty("kind")
     public String getKind() {
@@ -134,4 +143,18 @@ public class Item {
         this.additionalProperties.put(name, value);
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "kind='" + kind + '\'' +
+                ", id='" + id + '\'' +
+                ", etag='" + etag + '\'' +
+                ", selfLink='" + selfLink + '\'' +
+                ", volumeInfo=" + volumeInfo +
+                ", saleInfo=" + saleInfo +
+                ", accessInfo=" + accessInfo +
+                ", searchInfo=" + searchInfo +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }
