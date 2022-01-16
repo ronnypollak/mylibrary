@@ -23,7 +23,7 @@ import java.util.Locale;
 //TODO: changes Date to gregorian Calendar? to only get year
 
 public class Scrape {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         ObjectMapper mapper = new ObjectMapper();
 
         /*GoogleLib googleLib = mapper.readValue(new URL("https://www.googleapis.com/books/v1/volumes?q=isbn:0735619670"), GoogleLib.class);
@@ -31,19 +31,22 @@ public class Scrape {
         System.out.println(googleLib.getItems().get(0).getVolumeInfo().getTitle());
         System.out.println(googleLib.getItems());*/
 
-        FileInputStream fileInputStream = new FileInputStream("C:\\Uni\\Softwareentwicklung\\Projekt\\library\\src\\main\\resources\\static\\isbn_numbers\\isbn_small.txt");
+        FileInputStream fileInputStream = new FileInputStream("C:\\Uni\\Softwareentwicklung\\Projekt\\library\\src\\main\\resources\\static\\isbn_numbers\\isbn.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
 
         String isbn;
         String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
         ArrayList<Item> items = new ArrayList<>();
 
-        while ((isbn = br.readLine()) != null)   {
+        int i = 0;
+        while (((isbn = br.readLine()) != null) && i < 100) {
+            Thread.sleep(5000);
             GoogleLib googleLib = mapper.readValue(new URL(url + isbn), GoogleLib.class);
             if (googleLib.getTotalItems() != 0) {
                 googleLib.getItems().get(0).setIsbn((isbn));
                 items.add(googleLib.getItems().get(0));
                 System.out.println(isbn + " added");
+                i++;
             }
         }
 

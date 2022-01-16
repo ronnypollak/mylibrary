@@ -46,8 +46,6 @@ public class Book extends SingleIdEntity<Long> {
         this.pageCount = pageCount;
         this.language = language;
 
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy", Locale.ENGLISH);
-//        LocalDate date = LocalDate.parse(publishedDate, formatter);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy", Locale.ENGLISH);
         this.releaseDate = formatter.parse(publishedDate);
 
