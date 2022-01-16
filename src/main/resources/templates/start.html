@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="common/header :: header"/>
+    <style type="text/css" th:inline="text">
+        body{
+            background: url([[@{images/jaredd-craig-HH4WBGNyltc-unsplash.jpg}]]) no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+        }
+    </style>
+    <link th:href="@{/styles/css/index.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+<div th:replace="common/header :: navigation"/>
+
+
+<div class="container d-flex flex-column min-vh-100 justify-content-center align-items-center">
+    <div class="container2 d-flex flex-column justify-content-center align-items-center">
+        <h1>Do you want to search for your desired book from our database with over 500+ books? </h1>
+        <div class="btn-group" role="group">
+            <a class="btn d-flex text-center " href="/login" role="button">Sign in</a>
+            <a class="btn d-flex text-center" href="#" role="button">Register</a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
