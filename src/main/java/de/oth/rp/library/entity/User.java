@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class User extends SingleIdEntity<Long> {
 
-    @Id
+    @Id @GeneratedValue
     private long userId;
     private String username;
     @ElementCollection

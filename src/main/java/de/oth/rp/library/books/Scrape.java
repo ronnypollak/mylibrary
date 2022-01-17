@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.oth.rp.library.entity.Author;
 import de.oth.rp.library.entity.Book;
+import de.oth.rp.library.entity.Library;
 import de.oth.rp.library.openlib.OLAuthor;
 import de.oth.rp.library.openlib.OpenLibrary;
 import de.oth.rp.library.service.AuthorService;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Locale;
 
 //TODO: changes Date to gregorian Calendar? to only get year
+//TODO: avoid duplicates in saving
 
 @Component
 public class Scrape {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="common/header :: header"/>
+    <style type="text/css" th:inline="text">
+        body{
+            background: url([[@{images/daniel-zjV8ptYgcEo-unsplash.jpg}]]) no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+        }
+    </style>
+    <link th:href="@{/styles/css/index.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <div th:replace="common/header :: navigation"></div>
+
+    <div class="layer">
+        <div class="container d-flex flex-column  justify-content-center align-items-center min-vh-100" >
+            <div class="container d-flex flex-column  justify-content-center align-items-center">
+                <div class="container2 d-flex flex-column justify-content-center align-items-center">
+                    <h1>Search for your preferred Book</h1>
+                </div>
+            </div>
+
+            <div id="search-bar-container" class="container d-flex flex-column  justify-content-center align-items-center">
+                <div class="container2 d-flex flex-column justify-content-center align-items-center">
+                    <form name="myform" th:action="@{/search}" method="post">
+                        <div class="input-group rounded">
+                            <input id="search-input" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <!--                    <script>function submit(){-->
+        <!--                        const searchInput = document.getElementById('search-input');-->
+        <!--                        document.getElementById('form-id').submit();-->
+        <!--                        -->
+        <!--                    }</script>-->
+                            <span class="input-group-text border-0" id="search-addon" onclick="myform.submit()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                             </span>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

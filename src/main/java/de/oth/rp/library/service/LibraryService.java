@@ -11,4 +11,6 @@ public class LibraryService {
 
     @Autowired
     private LibraryRepo libraryRepo;
+
+    //TODO: if repo is empty do setup?
 }

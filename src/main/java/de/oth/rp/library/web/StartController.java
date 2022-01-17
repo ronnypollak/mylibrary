@@ -20,4 +20,12 @@ public class StartController {
         model.addAttribute("user", new User());
         return "login";
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST) // /login
+    public String doLogin(Model model) {
+        model.addAttribute("user", new User());
+        return "login";
+    }
+
+
 }
