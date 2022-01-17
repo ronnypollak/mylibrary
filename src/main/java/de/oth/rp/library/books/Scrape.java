@@ -79,11 +79,16 @@ public class Scrape {
                     }
             );
             System.out.println(books);
-            books.get(0).getAuthors().get(0).addBook(books.get(0));
+//            books.get(0).getAuthors().get(0).addBook(books.get(0));
             bookService.addBooks(books);
 
 //            authorService.addAuthor(books.get(0).getAuthors().get(0));
 //            bookService.addBook(books.get(0));
+            // Always add book first before auhtor?
+            books.forEach(book -> {
+                authorService.addAuthors(book.getAuthors());
+            });
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -91,6 +96,7 @@ public class Scrape {
 
     }
 
+    //map googlebook to book and get authors
     private static void mapBook(Item item, ArrayList<Book> books) throws IOException, ParseException {
         VolumeInfo volumeInfo = item.getVolumeInfo();
         ArrayList<Author> authors = new ArrayList<>();
@@ -111,6 +117,7 @@ public class Scrape {
         });
     }
 
+    // get authors for 1 specific book
     private static ArrayList<Author> getAuthors(List<String> authorList, ArrayList<Author> authors) throws IOException {
         // openLib api
         String url = "https://openlibrary.org/search/authors.json?q=";
