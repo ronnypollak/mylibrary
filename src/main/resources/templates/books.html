@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="common/header :: header"/>
+    <style type="text/css" th:inline="text">
+        body{
+            background: url([[@{images/library.jpg}]]) no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+        }
+    </style>
+    <link th:href="@{/styles/css/login.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+</body>
+</html>

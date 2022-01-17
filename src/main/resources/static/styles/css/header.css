@@ -1,0 +1,17 @@
+.navbar{
+    background-color: rgba(14, 14, 14 , 0.8);
+    font-size: 1.3rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+}
+
+#nav-left{
+    margin-right: 10px;
+}
+
+#nav-right{
+    margin-left: 10px;
+}
+ .navbar-brand{
+     font-size: 1.8rem;
+ }

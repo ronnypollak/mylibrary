@@ -4,6 +4,7 @@ import de.oth.rp.library.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,7 +25,8 @@ public class StartController {
     }
 
     @PostMapping(value = "/login") // /login
-    public String doLogin(Model model) {
+    public String doLogin(Model model, @ModelAttribute("email") String email
+                                    ,@ModelAttribute("password") String password) {
         model.addAttribute("user", new User());
         return "login";
     }
