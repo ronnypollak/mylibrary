@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.oth.rp.library.entity.Author;
 import de.oth.rp.library.entity.Book;
-import de.oth.rp.library.entity.Library;
 import de.oth.rp.library.openlib.OLAuthor;
 import de.oth.rp.library.openlib.OpenLibrary;
 import de.oth.rp.library.service.AuthorService;
@@ -70,9 +69,9 @@ public class Scrape {
             System.out.println(items);
             System.out.println(items.size());
             ArrayList<Book> books = new ArrayList<>();
-            ArrayList<Author> authors = new ArrayList<>();
+//            ArrayList<Author> authors = new ArrayList<>();
 
-            items.forEach((item) -> {
+            items.forEach(item -> {
                         try {
                             mapBook(item, books);
                         } catch (IOException | ParseException e) {
@@ -87,9 +86,9 @@ public class Scrape {
 //            authorService.addAuthor(books.get(0).getAuthors().get(0));
 //            bookService.addBook(books.get(0));
             // Always add book first before auhtor?
-            books.forEach(book -> {
-                authorService.addAuthors(book.getAuthors());
-            });
+            books.forEach(book ->
+                authorService.addAuthors(book.getAuthors())
+            );
 
         }catch (Exception e){
             e.printStackTrace();

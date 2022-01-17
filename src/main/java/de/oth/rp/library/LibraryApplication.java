@@ -22,7 +22,7 @@ public class LibraryApplication implements ApplicationRunner{
 	}
 
 	@Override
-	public void run(ApplicationArguments args) throws Exception {
+	public void run(ApplicationArguments args){
 		Scrape scrape = new Scrape(bookService, authorService);
 		scrape.setup();
 //		Book book = new Book();

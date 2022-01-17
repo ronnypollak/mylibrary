@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface AuthorService {
 
-    public Author addAuthor(Author author);
+    Author addAuthor(Author author);
 
-    public List<Author> addAuthors(List<Author> authors);
+    List<Author> addAuthors(List<Author> authors);
 
 
 }

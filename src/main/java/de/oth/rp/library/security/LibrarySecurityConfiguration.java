@@ -51,7 +51,6 @@ public class LibrarySecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         }catch (Exception ex){
             System.out.println(ex.getStackTrace());
-            System.out.println(ex);
         }
     }
 

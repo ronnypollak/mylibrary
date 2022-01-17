@@ -6,8 +6,6 @@ import de.oth.rp.library.repository.AuthorRepo;
 import de.oth.rp.library.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
