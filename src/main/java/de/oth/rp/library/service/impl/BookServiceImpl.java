@@ -42,4 +42,7 @@ public class BookServiceImpl implements BookService {
         return bookRepo.findBookByNameContaining(name);
     }
 
+    public Book findBookByIsbn(String isbn){
+        return bookRepo.findBookByIsbn(isbn);
+    }
 }

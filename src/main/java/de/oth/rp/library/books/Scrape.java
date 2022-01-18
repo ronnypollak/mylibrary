@@ -103,8 +103,10 @@ public class Scrape {
         ArrayList<Author> authors = new ArrayList<>();
 
         getAuthors(volumeInfo.getAuthors(), authors);
-        Book book = new Book(item.getIsbn(), volumeInfo.getTitle(), volumeInfo.getPageCount(), volumeInfo.getPublishedDate(), volumeInfo.getDescription(), volumeInfo.getLanguage(),
-                            volumeInfo.getCategories(), authors, volumeInfo.getImageLinks().getThumbnail());
+        Book book = new Book(item.getIsbn(), volumeInfo.getTitle(), volumeInfo.getPageCount(), volumeInfo.getPublishedDate(),
+                            volumeInfo.getDescription(), volumeInfo.getLanguage(),
+                            volumeInfo.getCategories(), authors, volumeInfo.getImageLinks().getThumbnail(),
+                            volumeInfo.getMaturityRating());
 
         books.add(book);
 

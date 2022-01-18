@@ -9,12 +9,20 @@
     margin: 1rem;
 }
 
+.container2.clickable:hover{
+    cursor: grabbing;
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
 .layer {
     background-color: rgba(14, 14, 14, 0.5);
     position: absolute;
     top: 63.188px;
     left: 0;
     width: 100%;
+    min-height: 100%;
 }
 
 li{
@@ -40,7 +48,7 @@ span{
     color:white;
 }
 
-#authors-list{
+.inline-list{
     display: inline;
 }
 
@@ -50,4 +58,18 @@ p{
 
 ul{
     padding-left: 0rem;
+}
+
+p.text{
+    padding: 5px;
+}
+
+h5{
+    color: white;
+}
+
+#book-pic{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }

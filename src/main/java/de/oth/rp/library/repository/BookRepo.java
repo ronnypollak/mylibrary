@@ -11,4 +11,6 @@ import java.util.List;
 public interface BookRepo extends PagingAndSortingRepository<Book, String> {
 
     List<Book> findBookByNameContaining(String name);
+
+    Book findBookByIsbn(String isbn);
 }
