@@ -52,7 +52,7 @@ public class Scrape {
             String isbn;
             String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
             ArrayList<Item> items = new ArrayList<>();
-            int amountBooks = 5;
+            int amountBooks = 20;
             int i = 0;
             while (((isbn = br.readLine()) != null) && i < amountBooks) {
                 Thread.sleep(2000);
@@ -104,7 +104,7 @@ public class Scrape {
 
         getAuthors(volumeInfo.getAuthors(), authors);
         Book book = new Book(item.getIsbn(), volumeInfo.getTitle(), volumeInfo.getPageCount(), volumeInfo.getPublishedDate(), volumeInfo.getDescription(), volumeInfo.getLanguage(),
-                            volumeInfo.getCategories(), authors);
+                            volumeInfo.getCategories(), authors, volumeInfo.getImageLinks().getThumbnail());
 
         books.add(book);
 

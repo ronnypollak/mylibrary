@@ -38,5 +38,8 @@ public class BookServiceImpl implements BookService {
         return bookRepo.save(book);
     }
 
+    public List<Book> findBooksByName(String name){
+        return bookRepo.findBookByNameContaining(name);
+    }
 
 }

@@ -31,17 +31,20 @@ public class Book extends SingleIdEntity<String> {
     private List<Author> authors;
     //added
     private int pageCount;
+    private String thumbnail;
 
 
     public Book() {
     }
 
-    public Book(String isbn, String title, int pageCount, String publishedDate, String description, String language, List<String> categories, List<Author> authors) throws ParseException {
+    public Book(String isbn, String title, int pageCount, String publishedDate, String description, String language,
+                List<String> categories, List<Author> authors, String thumbnail) throws ParseException {
         this.isbn = isbn;
         this.name = title;
         this.description = description;
         this.pageCount = pageCount;
         this.language = language;
+        this.thumbnail = thumbnail;
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy", Locale.ENGLISH);
         this.releaseDate = formatter.parse(publishedDate);
@@ -160,6 +163,14 @@ public class Book extends SingleIdEntity<String> {
 
     public void setPageCount(int pageCount) {
         this.pageCount = pageCount;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     @Override

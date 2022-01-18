@@ -14,4 +14,6 @@ public interface BookService {
     Book addBook(Book book, Author author);
 
     Book addBook(Book book);
+
+    List<Book> findBooksByName(String name);
 }

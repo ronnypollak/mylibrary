@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BookController {
 
     @GetMapping(value = "/books")
-    public String getBooksByName(Model model, @RequestParam("name") String name){
-
+    public String getBooksByName(Model model, @RequestParam("book_name") String name){
+        System.out.println(name);
         return "books";
     }
 }
