@@ -27,8 +27,27 @@ h2{
 
 span{
     color: white;
+    margin: 0.5rem;
 }
 
 .book-list-item{
     margin: 1rem;
+}
+
+
+.authors{
+    list-style-type: circle;
+    color:white;
+}
+
+#authors-list{
+    display: inline;
+}
+
+p{
+    color: white;
+}
+
+ul{
+    padding-left: 0rem;
 }

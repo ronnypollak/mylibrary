@@ -21,6 +21,7 @@ public class Book extends SingleIdEntity<String> {
     private float rating;
     private int claims;
     private File content;
+    @Column(columnDefinition="LONGTEXT")
     private String description;
 //    TODO: Make enum
     private String language;

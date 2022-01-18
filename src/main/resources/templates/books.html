@@ -25,9 +25,21 @@
                         <div class="d-flex flex-column book-list-item">
                             <div class="d-flex flex-row justify-content-center">
                                 <h2 th:text="${book.name}"></h2>
+                                <span>(4.5&#9734)</span>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center">
+                                <p>By:</p>
+                                <ul>
+                                    <li id="authors-list" class="authors" th:each="author : ${book.authors}" >
+                                        <span th:text="${author.name}"></span>
+                                    </li>
+                                </ul>
                             </div>
 
+
+
                             <span th:text="${book.description}"></span>
+
                         </div>
                     </div>
                 </div>
