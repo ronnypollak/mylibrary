@@ -36,7 +36,7 @@
                             <div class="d-flex flex-row justify-content-center">
                                 <p>By:</p>
                                 <ul>
-                                    <li id="authors-list" class="authors" th:each="author : ${book.authors}" >
+                                    <li class="authors inline-list" th:each="author : ${book.authors}" >
                                         <span th:text="${author.name}"></span>
                                     </li>
                                 </ul>
@@ -51,7 +51,7 @@
                 </div>
             </li>
         </ul>
-        <div th:if="${#lists.isEmpty(books)}" class="container">
+        <div th:if="${#lists.isEmpty(books)}" class="container centered">
             <div class="container2">
                 <h2>Unfortunately we couldn't find the book you were looking for</h2>
             </div>
