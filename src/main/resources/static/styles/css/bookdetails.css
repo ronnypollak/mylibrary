@@ -3,3 +3,9 @@
 body{
     overflow: hidden;
 }
+
+.btn{
+    position: absolute;
+    right: 45px;
+    bottom: 25px;
+}

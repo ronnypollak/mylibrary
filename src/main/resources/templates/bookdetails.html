@@ -51,18 +51,15 @@
                     <br>
                     <h5>Description:</h5>
                     <p class="text" th:text="${book.description}"></p>
-
-
-
-
                 </div>
+
+                <button class="btn btn-primary btn-lg" type="button">Claim</button>
             </div>
         </div>
         <div th:if="${book == null}" class="container centered">
             <div class="container2">
                 <h2>Unfortunately we couldn't find the book you were looking for</h2>
             </div>
-
         </div>
     </div>
 </body>
