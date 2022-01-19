@@ -27,27 +27,18 @@ public class LibrarySecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     private static final String[] ALLOW_ACCESS_WITHOUT_AUTHENTICATION = {
-          "/search", "/book/**", "/css/**", "/images/**", "/static/**", "/styles/css/**", "/templates/**","/fonts/**", "/", "/books", "/login", "/forgotPassword", "/register", "/static/isbn_numbers/**"
+            "/login","/dologin","/signin" , "/book/**", "/css/**", "/images/**",
+            "/static/**", "/styles/css/**", "/templates/**","/fonts/**", "/", "/login/**", "/forgotPassword", "/register", "/static/isbn_numbers/**"
     };
 
     @Override
     protected void configure(HttpSecurity http) {
         try {
             http.authorizeRequests()
-                    .antMatchers(ALLOW_ACCESS_WITHOUT_AUTHENTICATION)
-                    .permitAll().anyRequest().authenticated();
-            http
-                    .formLogin()
-                    .loginPage("/login").permitAll()
-                    .defaultSuccessUrl("/")
-                    .failureUrl("/login?error")
-                    .and()
-                    .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/?logout")
-                    .deleteCookies("remember-me")
-                    .permitAll()
-                    .and()
-                    .rememberMe();
+                    .antMatchers(ALLOW_ACCESS_WITHOUT_AUTHENTICATION).permitAll().anyRequest().authenticated()
+                    .and().formLogin().loginPage("/signin").permitAll().defaultSuccessUrl("/search").failureUrl("/")
+                    .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()
+                    .and().rememberMe();
 
         }catch (Exception ex){
             System.out.println(ex.getStackTrace());

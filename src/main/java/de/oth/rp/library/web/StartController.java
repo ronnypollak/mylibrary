@@ -25,29 +25,38 @@ public class StartController {
     }
 
 
-    @GetMapping(value = "/login") // /login
+    @GetMapping(value = "/signin") // /login
     public String login(Model model) {
 //        model.addAttribute("user", new User());
         return "login";
     }
 
-    @PostMapping(value = "/login") // /login
-    public String doLogin(Model model, @ModelAttribute("username") String username
-                                    ,@ModelAttribute("password") String password) {
+//    @GetMapping("/login")
+//    public String login() {
+//        return "login";
+//    }
 
-        Optional<User> optionalUser = userService.findById(username);
-        if (optionalUser.isPresent()){
-            if(optionalUser.get().getPassword() == passwordEncoder.encode(password)){
-                return "search";
-            }else {
-//                TODO: Add messages for failed login and register
-                System.out.println("wrong pw");
-                return "login";
-            }
-        }else {
-            System.out.println("user doesn't exist");
-            return "login";
-        }
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String doLogin(Model model, @ModelAttribute("username") String username
+//                                    ,@ModelAttribute("password") String password) {
+//
+//        Optional<User> optionalUser = userService.findById(username);
+//        if (optionalUser.isPresent()){
+//            if(!(optionalUser.get().getPassword() == passwordEncoder.encode(password))){
+//                return "search";
+//            }else {
+////                TODO: Add messages for failed login and register
+//                System.out.println("wrong pw");
+//                return "login";
+//            }
+//        }else {
+//            System.out.println("user doesn't exist");
+//            return "login";
+//        }
+//    }
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String doLogin() {
+        return "search";
     }
 
     @GetMapping(value = "/register") // /login
