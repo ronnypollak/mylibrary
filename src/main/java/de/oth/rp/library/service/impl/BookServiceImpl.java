@@ -45,4 +45,8 @@ public class BookServiceImpl implements BookService {
     public Book findBookByIsbn(String isbn){
         return bookRepo.findBookByIsbn(isbn);
     }
+
+    public Iterable<Book> findBooks(){
+        return bookRepo.findAll();
+    }
 }

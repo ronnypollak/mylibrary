@@ -16,7 +16,7 @@ import java.util.List;
 public class SearchController {
 
     @Autowired
-    BookService bookService;
+    private BookService bookService;
 
     @GetMapping(value = "/search") // /search
     public String searchBooks(Model model) {

@@ -19,4 +19,5 @@ public interface BookService {
 
     Book findBookByIsbn(String isbn);
 
+    Iterable<Book> findBooks();
 }

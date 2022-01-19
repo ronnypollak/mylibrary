@@ -1,4 +1,5 @@
 @import "main.css";
+@import "index.css";
 
 .card{
     width: 20rem;
@@ -15,5 +16,10 @@ h2{
 
 .doubleMargin{
     margin-top: 1rem !important;
+}
+
+.btn{
+    margin-right: 0;
+    background-color: #0d6efd;
 }
 

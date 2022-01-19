@@ -2,12 +2,15 @@ package de.oth.rp.library.books;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import de.oth.rp.library.entity.AccountType;
 import de.oth.rp.library.entity.Author;
 import de.oth.rp.library.entity.Book;
+import de.oth.rp.library.entity.User;
 import de.oth.rp.library.openlib.OLAuthor;
 import de.oth.rp.library.openlib.OpenLibrary;
 import de.oth.rp.library.service.AuthorService;
 import de.oth.rp.library.service.BookService;
+import de.oth.rp.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,72 +36,79 @@ public class Scrape {
     private BookService bookService;
     @Autowired
     private AuthorService authorService;
+    @Autowired
+    private UserService userService;
 
-    public Scrape(BookService bookService, AuthorService authorService) {
+    public Scrape(BookService bookService, AuthorService authorService, UserService userService) {
         this.bookService = bookService;
         this.authorService = authorService;
+        this.userService = userService;
+    }
+
+    public Scrape() {
     }
 
     public void setup(){
+        if (!bookService.findBooks().iterator().hasNext()){
+            try {
+                userService.addUser(new User("admin", "admin", AccountType.ADMIN));
+                userService.addUser(new User("standard", "standard", AccountType.STANDARD));
 
-        try {
-            ObjectMapper mapper = new ObjectMapper();
+                ObjectMapper mapper = new ObjectMapper();
 
-//            System.out.println(System.getProperty("user.dir"));
+                FileInputStream fileInputStream = new FileInputStream("src/main/resources/static/isbn_numbers/isbn.txt");
+                BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
 
-            FileInputStream fileInputStream = new FileInputStream("src/main/resources/static/isbn_numbers/isbn.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
-
-            String isbn;
-            String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
-            ArrayList<Item> items = new ArrayList<>();
-            int amountBooks = 20;
-            int i = 0;
-            while (((isbn = br.readLine()) != null) && i < amountBooks) {
-                Thread.sleep(2000);
-                GoogleLib googleLib = mapper.readValue(new URL(url + isbn), GoogleLib.class);
-                if (googleLib.getTotalItems() != 0) {
-                    googleLib.getItems().get(0).setIsbn((isbn));
-                    items.add(googleLib.getItems().get(0));
-                    System.out.println(isbn + " added");
-                    i++;
+                String isbn;
+                String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
+                ArrayList<Item> items = new ArrayList<>();
+                int amountBooks = 20;
+                int i = 0;
+                while (((isbn = br.readLine()) != null) && i < amountBooks) {
+                    Thread.sleep(1500);
+                    GoogleLib googleLib = mapper.readValue(new URL(url + isbn), GoogleLib.class);
+                    if (googleLib.getTotalItems() != 0) {
+                        googleLib.getItems().get(0).setIsbn((isbn));
+                        items.add(googleLib.getItems().get(0));
+                        System.out.println(isbn + " added to list");
+                        i++;
+                    }
                 }
-            }
 
-            fileInputStream.close();
-            System.out.println(items);
-            System.out.println(items.size());
-            ArrayList<Book> books = new ArrayList<>();
+                fileInputStream.close();
+                System.out.println(items);
+                System.out.println(items.size());
+                ArrayList<Book> books = new ArrayList<>();
 //            ArrayList<Author> authors = new ArrayList<>();
 
-            items.forEach(item -> {
-                        try {
-                            mapBook(item, books);
-                        } catch (IOException | ParseException e) {
-                            e.printStackTrace();
+                items.forEach(item -> {
+                            try {
+                                mapBook(item, books);
+                            } catch (IOException | ParseException | InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-            );
-            System.out.println(books);
-//            books.get(0).getAuthors().get(0).addBook(books.get(0));
-            bookService.addBooks(books);
+                );
+                System.out.println(books);
+                bookService.addBooks(books);
 
-//            authorService.addAuthor(books.get(0).getAuthors().get(0));
-//            bookService.addBook(books.get(0));
-            // Always add book first before auhtor?
-            books.forEach(book ->
-                authorService.addAuthors(book.getAuthors())
-            );
+                books.forEach(book ->
+                        authorService.addAuthors(book.getAuthors())
+                );
 
-        }catch (Exception e){
-            e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }else {
+            System.out.println("Repo already setup");
         }
 
 
+        System.out.println("setup done");
     }
 
     //map googlebook to book and get authors
-    private static void mapBook(Item item, ArrayList<Book> books) throws IOException, ParseException {
+    private static void mapBook(Item item, ArrayList<Book> books) throws IOException, ParseException, InterruptedException {
         VolumeInfo volumeInfo = item.getVolumeInfo();
         ArrayList<Author> authors = new ArrayList<>();
 
@@ -121,7 +131,7 @@ public class Scrape {
     }
 
     // get authors for 1 specific book
-    private static ArrayList<Author> getAuthors(List<String> authorList, ArrayList<Author> authors) throws IOException {
+    private static ArrayList<Author> getAuthors(List<String> authorList, ArrayList<Author> authors) throws IOException, InterruptedException {
         // openLib api
         String url = "https://openlibrary.org/search/authors.json?q=";
         ArrayList<OLAuthor> olAuthors = new ArrayList<>();
@@ -130,6 +140,7 @@ public class Scrape {
 
         for (String s : authorList) {
             String[] names = s.split("\\s+");
+            Thread.sleep(1000);
             OpenLibrary openLibrary = mapper.readValue(new URL(url + names[0] + "+" + names[1]), OpenLibrary.class);
             olAuthors.add(openLibrary.getOLAuthors().get(0));
         }

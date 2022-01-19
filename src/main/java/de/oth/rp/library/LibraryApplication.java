@@ -3,6 +3,7 @@ package de.oth.rp.library;
 import de.oth.rp.library.books.Scrape;
 import de.oth.rp.library.service.AuthorService;
 import de.oth.rp.library.service.BookService;
+import de.oth.rp.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,6 +17,8 @@ public class LibraryApplication implements ApplicationRunner{
 	private BookService bookService;
 	@Autowired
 	private AuthorService authorService;
+	@Autowired
+	private UserService userService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(LibraryApplication.class, args);
@@ -23,7 +26,7 @@ public class LibraryApplication implements ApplicationRunner{
 
 	@Override
 	public void run(ApplicationArguments args){
-		Scrape scrape = new Scrape(bookService, authorService);
+		Scrape scrape = new Scrape(bookService, authorService, userService);
 		scrape.setup();
 //		Book book = new Book();
 //		book.setIsbn("1234");

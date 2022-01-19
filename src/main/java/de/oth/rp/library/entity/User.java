@@ -21,11 +21,28 @@ public class User extends SingleIdEntity<String> implements UserDetails {
     private String password;
 //    @ElementCollection
 //    private List<String> ranks;
-    private final String role = "ADMIN";
+    @Enumerated(EnumType.ORDINAL)
+    private AccountType accountType;
     private int bookCount;
     private int downloadCount;
     @OneToMany
     private List<Book> ownedBooks;
+
+    public User() {
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.accountType = AccountType.STANDARD;
+    }
+
+    public User(String username, String password, AccountType accountType) {
+        this.username = username;
+        this.password = password;
+        this.accountType = accountType;
+    }
+
 
     @Override
     public String getID() {
@@ -37,7 +54,7 @@ public class User extends SingleIdEntity<String> implements UserDetails {
         return List.of(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return User.this.role;
+                return User.this.accountType.name();
             }
         });
     }
@@ -71,5 +88,46 @@ public class User extends SingleIdEntity<String> implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+    public int getBookCount() {
+        return bookCount;
+    }
+
+    public void setBookCount(int bookCount) {
+        this.bookCount = bookCount;
+    }
+
+    public int getDownloadCount() {
+        return downloadCount;
+    }
+
+    public void setDownloadCount(int downloadCount) {
+        this.downloadCount = downloadCount;
+    }
+
+    public List<Book> getOwnedBooks() {
+        return ownedBooks;
+    }
+
+    public void setOwnedBooks(List<Book> ownedBooks) {
+        this.ownedBooks = ownedBooks;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 }
