@@ -21,7 +21,7 @@ public class User extends SingleIdEntity<String> implements UserDetails {
     private String password;
 //    @ElementCollection
 //    private List<String> ranks;
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private AccountType accountType;
     private int bookCount;
     private int downloadCount;
