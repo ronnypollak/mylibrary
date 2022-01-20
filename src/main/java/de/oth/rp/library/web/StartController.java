@@ -36,16 +36,6 @@ public class StartController {
     }
 
 
-//    @GetMapping(value = "/signin") // /login
-//    public String login(Model model) {
-////        model.addAttribute("user", new User());
-//        return "login";
-//    }
-
-//    @GetMapping("/login")
-//    public String login() {
-//        return "login";
-//    }
 
 //    @RequestMapping(value = "/login", method = RequestMethod.POST)
 //    public String doLogin(Model model, @ModelAttribute("username") String username

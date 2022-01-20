@@ -9,3 +9,17 @@ body{
     right: 45px;
     bottom: 25px;
 }
+
+#checked{
+    position: absolute;
+    right: 50px;
+    bottom: 30px;
+    color: green;
+    width: 35px;
+    height: 35px;
+}
+
+#book-claimed{
+    margin-left: 0px;
+    font-weight: bold;
+}

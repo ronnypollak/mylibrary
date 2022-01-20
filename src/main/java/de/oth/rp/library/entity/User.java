@@ -22,7 +22,7 @@ public class User extends SingleIdEntity<String> implements UserDetails {
     private AccountType accountType;
     private int bookCount;
     private int downloadCount;
-    @OneToMany
+    @ManyToMany
     private List<Book> ownedBooks;
 
     public User() {
