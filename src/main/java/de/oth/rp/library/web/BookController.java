@@ -50,12 +50,7 @@ public class BookController {
                                   @PathVariable("isbn") String isbn){
         User user = userService.getUserByUsername(principal.getName());
         Book book = bookService.findBookByIsbn(isbn);
-        if(!user.getOwnedBooks().contains(book)){
-            List<Book> books = user.getOwnedBooks();
-            books.add(book);
-            user.setOwnedBooks(books);
-            userService.save(user);
-        }
+        userService.addBookToUser(user, book);
         model.addAttribute("book", book);
         model.addAttribute("user", user);
         return "bookdetails";

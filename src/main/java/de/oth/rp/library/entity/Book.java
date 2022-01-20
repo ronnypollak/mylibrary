@@ -25,7 +25,6 @@ public class Book extends SingleIdEntity<String> {
     private Date releaseDate;
     private float rating;
     private int claims;
-//    private String content;
     @Column(columnDefinition="LONGTEXT")
     private String description;
 //    TODO: Make enum
@@ -33,11 +32,13 @@ public class Book extends SingleIdEntity<String> {
 //    TODO: @ElementCollection untersuchen oder evtl eigene Klasse machen
     @ElementCollection
     private List<String> categories;
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", cascade = CascadeType.REMOVE)
     private List<Author> authors;
     private int pageCount;
     private String thumbnail;
     private String maturityRating;
+    @ManyToMany(mappedBy = "ownedBooks")
+    private List<User> ownedBy;
 
 
     public Book() {
@@ -233,6 +234,14 @@ public class Book extends SingleIdEntity<String> {
 
     public void setMaturityRating(String maturityRating) {
         this.maturityRating = maturityRating;
+    }
+
+    public List<User> getOwnedBy() {
+        return ownedBy;
+    }
+
+    public void setOwnedBy(List<User> ownedBy) {
+        this.ownedBy = ownedBy;
     }
 
     @Override

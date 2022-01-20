@@ -20,13 +20,11 @@ public class SearchController {
 
     @GetMapping(value = "/search") // /search
     public String searchBooks(Model model) {
-//        model.addAttribute("user", new User());
         return "search";
     }
 
     @PostMapping(value = "/search") // /search
     public String doSearchBooks(Model model, @RequestParam("book_name") String name) {
-//        model.addAttribute("user", new User());
         System.out.println(name);
         List<Book> books;
         books = bookService.findBooksByName(name);
