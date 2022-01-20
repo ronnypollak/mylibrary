@@ -51,8 +51,10 @@
                     <br>
                     <h5>Description:</h5>
                     <p class="text" th:text="${book.description}"></p>
-                    <span id="book-claimed" th:if="${user.ownedBooks.contains(book)}"> Congrats you already claimed this book! <a href="/books" >Click here to look at all your books!</a></span>
-
+                    <span class="book-claimed" th:if="${user.ownedBooks.contains(book)}"> Congrats you already claimed this book!
+                        <a th:if="${user.ownedBooks.contains(book)}" th:href="@{'/files/' + ${book.isbn} + '.pdf'}" th:download="${book.isbn} + '.pdf'">Download</a>
+                        or
+                        <a href="/books" >click here to look at all your books!</a></span>
                 </div>
                 <form th:unless="${user.ownedBooks.contains(book)}" name="myform" th:action="@{/book/{isbn}(isbn=${book.isbn})}" method="post">
                     <button class="btn btn-primary btn-lg" type="button" onclick="myform.submit()">Claim</button>

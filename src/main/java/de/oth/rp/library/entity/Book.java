@@ -2,13 +2,18 @@ package de.oth.rp.library.entity;
 
 
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import de.oth.rp.library.entity.util.SingleIdEntity;
 
 import javax.persistence.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 
 @Entity
 public class Book extends SingleIdEntity<String> {
@@ -20,7 +25,7 @@ public class Book extends SingleIdEntity<String> {
     private Date releaseDate;
     private float rating;
     private int claims;
-    private File content;
+//    private String content;
     @Column(columnDefinition="LONGTEXT")
     private String description;
 //    TODO: Make enum
@@ -30,7 +35,6 @@ public class Book extends SingleIdEntity<String> {
     private List<String> categories;
     @ManyToMany(mappedBy = "books")
     private List<Author> authors;
-    //added
     private int pageCount;
     private String thumbnail;
     private String maturityRating;
@@ -65,7 +69,6 @@ public class Book extends SingleIdEntity<String> {
         sb.append(", releaseDate=").append(releaseDate);
         sb.append(", rating=").append(rating);
         sb.append(", claims=").append(claims);
-        sb.append(", content=").append(content);
         sb.append(", description='").append(description).append('\'');
         sb.append(", language='").append(language).append('\'');
         sb.append(", categories=").append(categories);
@@ -120,12 +123,55 @@ public class Book extends SingleIdEntity<String> {
         this.claims = claims;
     }
 
-    public File getContent() {
-        return content;
-    }
+//    public String getContent() {
+//        String path = "src/main/resources/static/files/" + isbn + ".pdf";
+//        File f = new File(path);
+//            if (!f.exists()) {
+//            Document document = new Document();
+//
+//            try {
+//
+//                PdfWriter.getInstance(document, new FileOutputStream(path));
+//            } catch (DocumentException | FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//
+//            document.open();
+////            Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+////            Chunk chunk = new Chunk("test", font);
+//
+//            try {
+//                document.add(new Paragraph(description));
+//            } catch (DocumentException e) {
+//                e.printStackTrace();
+//            }
+//            document.close();
+//        }
+//        return isbn;
+//    }
 
-    public void setContent(File content) {
-        this.content = content;
+    public void createFile() {
+        String path = "src/main/resources/static/files/" + isbn + ".pdf";
+        File f = new File(path);
+        if (!f.exists()) {
+            Document document = new Document();
+
+            try {
+
+                PdfWriter.getInstance(document, new FileOutputStream(path));
+            } catch (DocumentException | FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            document.open();
+
+            try {
+                document.add(new Paragraph(description));
+            } catch (DocumentException e) {
+                e.printStackTrace();
+            }
+            document.close();
+        }
     }
 
     public String getDescription() {
@@ -190,11 +236,11 @@ public class Book extends SingleIdEntity<String> {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Book book = (Book) o;
-        return Float.compare(book.rating, rating) == 0 && claims == book.claims && pageCount == book.pageCount && Objects.equals(isbn, book.isbn) && Objects.equals(name, book.name) && Objects.equals(releaseDate, book.releaseDate) && Objects.equals(content, book.content) && Objects.equals(description, book.description) && Objects.equals(language, book.language) && Objects.equals(categories, book.categories);
+        return Float.compare(book.rating, rating) == 0 && claims == book.claims && pageCount == book.pageCount && Objects.equals(isbn, book.isbn) && Objects.equals(name, book.name) && Objects.equals(releaseDate, book.releaseDate) && Objects.equals(description, book.description) && Objects.equals(language, book.language) && Objects.equals(categories, book.categories);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), isbn, name, releaseDate, rating, claims, content, description, language, categories, pageCount);
+        return Objects.hash(super.hashCode(), isbn, name, releaseDate, rating, claims, description, language, categories, pageCount);
     }
 }

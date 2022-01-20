@@ -37,6 +37,11 @@ public class BookController {
         model.addAttribute("book", book);
         User user = userService.getUserByUsername(principal.getName());
         model.addAttribute("user", user);
+
+        // hilfsmethode
+        book.createFile();
+        //
+
         return "bookdetails";
     }
 
@@ -44,10 +49,11 @@ public class BookController {
     public String claimBookByIsbn(Model model, Principal principal,
                                   @PathVariable("isbn") String isbn){
         User user = userService.getUserByUsername(principal.getName());
-//        Book book = (Book) model.getAttribute("book");
         Book book = bookService.findBookByIsbn(isbn);
         if(!user.getOwnedBooks().contains(book)){
-            user.getOwnedBooks().add(book);
+            List<Book> books = user.getOwnedBooks();
+            books.add(book);
+            user.setOwnedBooks(books);
             userService.addUser(user);
         }
         model.addAttribute("book", book);

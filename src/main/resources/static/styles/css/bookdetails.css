@@ -19,7 +19,7 @@ body{
     height: 35px;
 }
 
-#book-claimed{
+.book-claimed{
     margin-left: 0px;
     font-weight: bold;
 }

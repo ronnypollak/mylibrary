@@ -27,7 +27,7 @@ public class LibrarySecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     private static final String[] ALLOW_ACCESS_WITHOUT_AUTHENTICATION = {
-            "/login", "/css/**", "/images/**",
+            "/login", "/css/**", "/images/**", "/static/files/**", "/files/**",
             "/static/**", "/styles/css/**", "/templates/**","/fonts/**", "/", "/forgotPassword", "/register", "/static/isbn_numbers/**"
     };
 
