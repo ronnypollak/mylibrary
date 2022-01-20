@@ -1,6 +1,8 @@
 package de.oth.rp.library;
 
 import de.oth.rp.library.books.Scrape;
+import de.oth.rp.library.entity.AccountType;
+import de.oth.rp.library.entity.User;
 import de.oth.rp.library.service.AuthorService;
 import de.oth.rp.library.service.BookService;
 import de.oth.rp.library.service.UserService;
@@ -31,5 +33,24 @@ public class LibraryApplication implements ApplicationRunner{
 //		Book book = new Book();
 //		book.setIsbn("1234");
 //		bookService.addBook(book);
+		try {
+			userService.getUserByUsername("admin@othr.de");
+		} catch (Exception ex) {
+			User admin = new User();
+			admin.setName("john");
+			admin.setPassword("secret");
+			admin.setAccountType(AccountType.ADMIN);
+			userService.registerUser(admin);
+		}
+
+		try {
+			userService.getUserByUsername("maxi@muster.de");
+		} catch (Exception ex) {
+			User normalo = new User();
+			normalo.setName("Maxi Muster");
+			normalo.setPassword("secret");
+			normalo.setAccountType(AccountType.STANDARD);
+			userService.registerUser(normalo);
+		}
 	}
 }

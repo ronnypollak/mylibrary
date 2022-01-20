@@ -44,17 +44,23 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/search">Authors</a>
                     </li>
-                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <li>
+                        <a class="nav-link" href="/logout" sec:authorize="isAuthenticated()">Logout</a>
+                    </li>
+                    <li class="nav-item dropdown" sec:authorize="hasAuthority('ADMIN')">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Admin
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="book">Buch hinzufügen</a></li>
-                            <li><a class="dropdown-item" href="book">Buch löschen</a></li>
+                            <li><a class="dropdown-item" href="book">add book</a></li>
+                            <li><a class="dropdown-item" href="book">delete book</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Nutzer hinzufügen</a></li>
-                            <li><a class="dropdown-item" href="#">Nutzer löschen</a></li>
+                            <li><a class="dropdown-item" href="#">add author</a></li>
+                            <li><a class="dropdown-item" href="#">edit author</a></li>
+                            <li><a class="dropdown-item" href="#">delete author</a></li>
                             <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">add user</a></li>
+                            <li><a class="dropdown-item" href="#">delete user</a></li>
                         </ul>
                     </li>
                 </ul>

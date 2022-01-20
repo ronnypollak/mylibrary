@@ -17,7 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class LibrarySecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsService userSecurityService;
 
     @Autowired
     private LibrarySecurityUtilities librarySecurityUtilities;
@@ -27,32 +27,35 @@ public class LibrarySecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     private static final String[] ALLOW_ACCESS_WITHOUT_AUTHENTICATION = {
-            "/login","/dologin","/signin" , "/book/**", "/css/**", "/images/**",
-            "/static/**", "/styles/css/**", "/templates/**","/fonts/**", "/", "/login/**", "/forgotPassword", "/register", "/static/isbn_numbers/**"
+            "/login", "/css/**", "/images/**",
+            "/static/**", "/styles/css/**", "/templates/**","/fonts/**", "/", "/forgotPassword", "/register", "/static/isbn_numbers/**"
     };
 
     @Override
-    protected void configure(HttpSecurity http) {
-        try {
-            http.authorizeRequests()
-                    .antMatchers(ALLOW_ACCESS_WITHOUT_AUTHENTICATION).permitAll().anyRequest().authenticated()
-                    .and().formLogin().loginPage("/signin").permitAll().defaultSuccessUrl("/search").failureUrl("/")
-                    .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()
-                    .and().rememberMe();
-
-        }catch (Exception ex){
-            System.out.println(ex.getStackTrace());
-        }
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers(ALLOW_ACCESS_WITHOUT_AUTHENTICATION)
+                .permitAll().anyRequest().authenticated();
+        http
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/search")
+                .failureUrl("/login?error")
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/?logout")
+                .deleteCookies("remember-me")
+                .permitAll()
+                .and()
+                .rememberMe();
+        // Cross-Site Request Forgery ausschalten
+        http.csrf().disable();
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) {
-        try {
-            auth.userDetailsService(userDetailsService)
-                    .passwordEncoder(passwordEncoder());
-        }catch (Exception ex){
-            System.out.println(ex);
-        }
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userSecurityService)
+                .passwordEncoder(passwordEncoder());
     }
 
 }

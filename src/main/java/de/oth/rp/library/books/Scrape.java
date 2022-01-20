@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Locale;
 
 //TODO: changes Date to gregorian Calendar? to only get year
-//TODO: avoid duplicates in saving
 
 @Component
 public class Scrape {

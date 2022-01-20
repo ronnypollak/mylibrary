@@ -24,12 +24,23 @@ public class StartController {
         return "start";
     }
 
-
-    @GetMapping(value = "/signin") // /login
+    @RequestMapping(value = "/login", method = RequestMethod.GET) // /login
     public String login(Model model) {
-//        model.addAttribute("user", new User());
+        model.addAttribute("user", new User());
         return "login";
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST) // th:action="@{/login}"
+    public String doLogin() {
+        return "index";
+    }
+
+
+//    @GetMapping(value = "/signin") // /login
+//    public String login(Model model) {
+////        model.addAttribute("user", new User());
+//        return "login";
+//    }
 
 //    @GetMapping("/login")
 //    public String login() {
@@ -54,12 +65,12 @@ public class StartController {
 //            return "login";
 //        }
 //    }
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String doLogin() {
-        return "search";
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String doLogin() {
+//        return "search";
+//    }
 
-    @GetMapping(value = "/register") // /login
+    @GetMapping(value = "/register")
     public String register() {
         return "register";
     }
@@ -72,9 +83,11 @@ public class StartController {
             User user = new User(username, password);
             userService.addUser(user);
             model.addAttribute("user", user);
-            return "search";
+            return "login";
         }
     }
+
+
 
 
 }

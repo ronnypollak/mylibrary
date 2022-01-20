@@ -8,19 +8,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class User extends SingleIdEntity<String> implements UserDetails {
 
-//    @Id @GeneratedValue
-//    private long userId;
     @Id
     @Column(nullable = false, unique = true)
-    private String username;
+    private String name;
     @Column(nullable = false)
     private String password;
-//    @ElementCollection
-//    private List<String> ranks;
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
     private int bookCount;
@@ -31,22 +28,28 @@ public class User extends SingleIdEntity<String> implements UserDetails {
     public User() {
     }
 
-    public User(String username, String password) {
-        this.username = username;
+    public User(String name, String password) {
+        this.name = name;
         this.password = password;
         this.accountType = AccountType.STANDARD;
     }
 
-    public User(String username, String password, AccountType accountType) {
-        this.username = username;
+    public User(String name, String password, AccountType accountType) {
+        this.name = name;
         this.password = password;
         this.accountType = accountType;
     }
 
+    @Override
+    public String getUsername() {
+        return this.name;
+    }
+
+
 
     @Override
     public String getID() {
-        return this.username;
+        return this.name;
     }
 
     @Override
@@ -60,14 +63,17 @@ public class User extends SingleIdEntity<String> implements UserDetails {
     }
 
 
-    @Override
-    public String getPassword() {
-        return password;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
-    public String getUsername() {
-        return username;
+    public String getPassword() {
+        return password;
     }
 
     @Override
@@ -90,14 +96,17 @@ public class User extends SingleIdEntity<String> implements UserDetails {
         return true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
 
     public int getBookCount() {
         return bookCount;
@@ -123,11 +132,30 @@ public class User extends SingleIdEntity<String> implements UserDetails {
         this.ownedBooks = ownedBooks;
     }
 
-    public AccountType getAccountType() {
-        return accountType;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        User user = (User) o;
+        return bookCount == user.bookCount && downloadCount == user.downloadCount && name.equals(user.name) && password.equals(user.password) && accountType == user.accountType && Objects.equals(ownedBooks, user.ownedBooks);
     }
 
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), name, password, accountType, bookCount, downloadCount, ownedBooks);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", accountType=").append(accountType);
+        sb.append(", bookCount=").append(bookCount);
+        sb.append(", downloadCount=").append(downloadCount);
+        sb.append(", ownedBooks=").append(ownedBooks);
+        sb.append('}');
+        return sb.toString();
     }
 }
