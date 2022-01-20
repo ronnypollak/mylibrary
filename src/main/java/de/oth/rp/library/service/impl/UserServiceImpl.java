@@ -20,10 +20,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public void addUser(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepo.save(user);
-    }
+//    public void addUser(User user){
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        userRepo.save(user);
+//    }
 
     public Optional<User> findById(String username){
         return userRepo.findById(username);
@@ -47,5 +47,9 @@ public class UserServiceImpl implements UserService {
         return userRepo.findById(username).orElseThrow(
                 () -> new UsernameNotFoundException("User with email " + username + " not found")
         );
+    }
+
+    public void save(User user){
+        userRepo.save(user);
     }
 }

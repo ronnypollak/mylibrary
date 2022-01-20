@@ -7,10 +7,12 @@ import java.util.Optional;
 
 public interface UserService extends UserDetailsService {
 
-    void addUser(User user);
+//    void addUser(User user);
 
     Optional<User> findById(String name);
 
     User getUserByUsername(String username);
     User registerUser(User newUser);
+
+    void save(User user);
 }

@@ -47,7 +47,7 @@ public class LibraryApplication implements ApplicationRunner{
 			userService.getUserByUsername("maxi@muster.de");
 		} catch (Exception ex) {
 			User normalo = new User();
-			normalo.setName("Maxi Muster");
+			normalo.setName("Maxi");
 			normalo.setPassword("secret");
 			normalo.setAccountType(AccountType.STANDARD);
 			userService.registerUser(normalo);

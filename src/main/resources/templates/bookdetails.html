@@ -52,7 +52,7 @@
                     <h5>Description:</h5>
                     <p class="text" th:text="${book.description}"></p>
                     <span class="book-claimed" th:if="${user.ownedBooks.contains(book)}"> Congrats you already claimed this book!
-                        <a th:if="${user.ownedBooks.contains(book)}" th:href="@{'/files/' + ${book.isbn} + '.pdf'}" th:download="${book.isbn} + '.pdf'">Download</a>
+                        <a th:if="${user.ownedBooks.contains(book)}" th:href="@{'/files/' + ${book.getID()} + '.pdf'}" th:download="${book.getID()} + '.pdf'">Download</a>
                         or
                         <a href="/books" >click here to look at all your books!</a></span>
                 </div>

@@ -153,6 +153,11 @@ public class Book extends SingleIdEntity<String> {
     public void createFile() {
         String path = "src/main/resources/static/files/" + isbn + ".pdf";
         File f = new File(path);
+        File directory = new File("src/main/resources/static/files/");
+        if (! directory.exists()){
+            directory.mkdir();
+        }
+
         if (!f.exists()) {
             Document document = new Document();
 

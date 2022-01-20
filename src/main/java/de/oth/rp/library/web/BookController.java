@@ -39,7 +39,7 @@ public class BookController {
         model.addAttribute("user", user);
 
         // hilfsmethode
-        book.createFile();
+//        book.createFile();
         //
 
         return "bookdetails";
@@ -54,7 +54,7 @@ public class BookController {
             List<Book> books = user.getOwnedBooks();
             books.add(book);
             user.setOwnedBooks(books);
-            userService.addUser(user);
+            userService.save(user);
         }
         model.addAttribute("book", book);
         model.addAttribute("user", user);

@@ -71,7 +71,7 @@ public class StartController {
         if (userService.findById(username).isPresent()) return "register";
         else {
             User user = new User(username, password);
-            userService.addUser(user);
+            userService.save(user);
             model.addAttribute("user", user);
             return "login";
         }

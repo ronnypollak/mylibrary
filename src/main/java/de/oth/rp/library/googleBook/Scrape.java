@@ -50,8 +50,8 @@ public class Scrape {
     public void setup(){
         if (!bookService.findBooks().iterator().hasNext()){
             try {
-                userService.addUser(new User("admin", "admin", AccountType.ADMIN));
-                userService.addUser(new User("standard", "standard", AccountType.STANDARD));
+                userService.registerUser(new User("admin", "admin", AccountType.ADMIN));
+                userService.registerUser(new User("standard", "standard", AccountType.STANDARD));
 
                 ObjectMapper mapper = new ObjectMapper();
 
@@ -78,7 +78,6 @@ public class Scrape {
                 System.out.println(items);
                 System.out.println(items.size());
                 ArrayList<Book> books = new ArrayList<>();
-//            ArrayList<Author> authors = new ArrayList<>();
 
                 items.forEach(item -> {
                             try {
@@ -92,7 +91,10 @@ public class Scrape {
                 bookService.addBooks(books);
 
                 books.forEach(book ->
-                        authorService.addAuthors(book.getAuthors())
+                        {
+                            authorService.addAuthors(book.getAuthors());
+                            book.createFile();
+                        }
                 );
 
             }catch (Exception e){

@@ -43,7 +43,7 @@ public class LibrarySecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error")
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/?logout")
+                .logoutSuccessUrl("/")
                 .deleteCookies("remember-me")
                 .permitAll()
                 .and()
