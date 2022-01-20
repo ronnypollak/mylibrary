@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <th:block th:insert="common/header :: header"/>
+  <style type="text/css" th:inline="text">
+    body{
+      background: url([[@{images/library.jpg}]]) no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+    }
+  </style>
+  <link th:href="@{/styles/css/books.css}" rel="stylesheet" />
+</head>
+
+<body>
+<div th:replace="common/header :: navigation"></div>
+<div class="layer">
+
+  <div class="container centered">
+    <div class="container2">
+      <h2>Oups something went wrong. We are sorry for the inconvenience. Please try again</h2>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

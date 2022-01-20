@@ -77,7 +77,10 @@ public class StartController {
         }
     }
 
-
+    @GetMapping(value = "/error")
+    public String error() {
+        return "error";
+    }
 
 
 }
