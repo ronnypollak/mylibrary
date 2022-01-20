@@ -1,4 +1,4 @@
-package de.oth.rp.library.books;
+package de.oth.rp.library.googleBook;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

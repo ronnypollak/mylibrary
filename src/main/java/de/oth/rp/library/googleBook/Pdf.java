@@ -1,5 +1,5 @@
 
-package de.oth.rp.library.books;
+package de.oth.rp.library.googleBook;
 
 import com.fasterxml.jackson.annotation.*;
 
@@ -9,37 +9,24 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "text",
-    "image"
+    "isAvailable"
 })
 @Generated("jsonschema2pojo")
-public class ReadingModes {
+public class Pdf {
 
-    @JsonProperty("text")
-    private Boolean text;
-    @JsonProperty("image")
-    private Boolean image;
+    @JsonProperty("isAvailable")
+    private Boolean isAvailable;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("text")
-    public Boolean getText() {
-        return text;
+    @JsonProperty("isAvailable")
+    public Boolean getIsAvailable() {
+        return isAvailable;
     }
 
-    @JsonProperty("text")
-    public void setText(Boolean text) {
-        this.text = text;
-    }
-
-    @JsonProperty("image")
-    public Boolean getImage() {
-        return image;
-    }
-
-    @JsonProperty("image")
-    public void setImage(Boolean image) {
-        this.image = image;
+    @JsonProperty("isAvailable")
+    public void setIsAvailable(Boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 
     @JsonAnyGetter

@@ -1,5 +1,5 @@
 
-package de.oth.rp.library.books;
+package de.oth.rp.library.googleBook;
 
 import com.fasterxml.jackson.annotation.*;
 
@@ -9,37 +9,24 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "type",
-    "identifier"
+    "isAvailable"
 })
 @Generated("jsonschema2pojo")
-public class IndustryIdentifier {
+public class Epub {
 
-    @JsonProperty("type")
-    private String type;
-    @JsonProperty("identifier")
-    private String identifier;
+    @JsonProperty("isAvailable")
+    private Boolean isAvailable;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("type")
-    public String getType() {
-        return type;
+    @JsonProperty("isAvailable")
+    public Boolean getIsAvailable() {
+        return isAvailable;
     }
 
-    @JsonProperty("type")
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @JsonProperty("identifier")
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    @JsonProperty("identifier")
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
+    @JsonProperty("isAvailable")
+    public void setIsAvailable(Boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 
     @JsonAnyGetter

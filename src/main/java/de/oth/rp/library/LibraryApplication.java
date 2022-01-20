@@ -1,6 +1,6 @@
 package de.oth.rp.library;
 
-import de.oth.rp.library.books.Scrape;
+import de.oth.rp.library.googleBook.Scrape;
 import de.oth.rp.library.entity.AccountType;
 import de.oth.rp.library.entity.User;
 import de.oth.rp.library.service.AuthorService;
