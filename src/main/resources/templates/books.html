@@ -28,7 +28,7 @@
 
                     <div class="container2 d-flex clickable" th:attr="onclick=|redirect('${book.isbn}')|" >
                         <img th:src="${book.thumbnail}" alt="thumbnail of the book" class="book-list-item">
-                        <div class="d-flex flex-column book-list-item">
+                        <div id="textbox" class="d-flex flex-column book-list-item">
                             <div class="d-flex flex-row justify-content-center">
                                 <h2 th:text="${book.name}"></h2>
                                 <span>(4.5&#9734)</span>
